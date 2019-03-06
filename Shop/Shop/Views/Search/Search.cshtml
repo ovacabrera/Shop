@@ -1,0 +1,55 @@
+﻿@model IEnumerable<Shop.Entities.Result>
+
+@*@{
+    ViewData["Title"] = "View";
+}
+
+<h1>View</h1>
+        
+<p>
+    <a asp-action="Create">Create New</a>
+</p>*@
+<div class="container">
+@foreach (var item in Model) {
+    <div class="row">
+        @*@Html.DisplayFor(modelItem => item.id)*@        
+        <div class="col-4">
+            <img src="@Html.DisplayFor(modelItem => item.thumbnail)" />
+        </div>
+        <div class="col">
+            <span>@Html.DisplayFor(modelItem => item.title)</span>
+            <span>$</span>
+            <span>@Html.DisplayFor(modelItem => item.price)</span>
+            @*<span>@Html.DisplayFor(modelItem => item.original_price)</span>*@
+            <span>@Html.DisplayFor(modelItem => item.sold_quantity)</span>
+            <span>Vendidos</span>
+        </div>
+        @*<div>
+            <span>@Html.DisplayFor(modelItem => item.condition)</span>
+        </div>*@    
+    </div>
+        }
+</div>
+@*<table class="table">
+    <tbody>
+
+        <tr>
+            <td hidden="true">
+                
+            </td>
+            <td>
+                
+            </td>
+            <td>
+
+                
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new {/* id=item.PrimaryKey */}) |
+                @Html.ActionLink("Details", "Details", new {/* id=item.PrimaryKey */}) |
+                @Html.ActionLink("Delete", "Delete", new {/* id=item.PrimaryKey */})
+            </td>
+        </tr>
+
+    </tbody>
+</table>*@

@@ -1,0 +1,186 @@
+﻿@model Shop.Entities.Item
+
+@{
+    ViewData["Title"] = "ItemView";
+}
+
+<h1>ItemView</h1>
+
+<div>
+    <h4>Item</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.site_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.site_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.seller_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.seller_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.category_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.category_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.base_price)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.base_price)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.currency_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.currency_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.initial_quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.initial_quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.available_quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.available_quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.sold_quantity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.sold_quantity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.buying_mode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.buying_mode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.listing_type_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.listing_type_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.start_time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.start_time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.stop_time)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.stop_time)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.condition)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.condition)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.permalink)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.permalink)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.thumbnail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.thumbnail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.secure_thumbnail)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.secure_thumbnail)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.accepts_mercadopago)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.accepts_mercadopago)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.international_delivery_mode)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.international_delivery_mode)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.listing_source)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.listing_source)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.status)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.status)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.domain_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.domain_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.automatic_relist)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.automatic_relist)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.date_created)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.date_created)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.last_updated)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.last_updated)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.health)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.health)
+        </dd>
+    </dl>
+</div>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    <a asp-action="Index">Back to List</a>
+</div>
