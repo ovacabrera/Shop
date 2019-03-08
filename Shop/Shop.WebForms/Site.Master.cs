@@ -21,7 +21,10 @@ namespace Shop.WebForms
 
         protected void lnkSearch_OnClick(object sender, EventArgs e)
         {
-            Page.Response.Redirect("~/Pages/Search.aspx?q=" + txtFilter.Text);
+            if (txtFilter.Value.Trim() != string.Empty)
+            {
+                Page.Response.Redirect("~/Pages/Search.aspx?q=" + txtFilter.Value);
+            }
         }
 
         #endregion

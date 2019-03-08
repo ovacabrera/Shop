@@ -34,12 +34,12 @@ namespace Shop.ExternalServices
             }
         }
 
-        public SearchResult GetItems(string q)
+        public SearchResult SearchItems(string filter, int? offset, int? limit)
         {
             try
             {
                 var mercadoLibreApi = RestService.For<IMercadoLibreApi>("https://api.mercadolibre.com");
-                return mercadoLibreApi.GetItems(q).Result;
+                return mercadoLibreApi.SearchItems(filter,offset,limit).Result;
             }
             catch (Exception e)
             {

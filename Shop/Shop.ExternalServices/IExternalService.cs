@@ -9,6 +9,6 @@ namespace Shop.ExternalServices
 
         LargeDescription GetItemLargeDescription(string itemId);
 
-        SearchResult GetItems(string q);
+        SearchResult SearchItems(string filter, int? offset, int? limit);
     }
 }

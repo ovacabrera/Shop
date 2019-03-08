@@ -13,11 +13,19 @@ namespace Shop.ExternalServices.IRetrofit
         [Get("/items/{Item_id}")]
         Task<Item> GetItem(string Item_id);
 
-        [Get("/sites/MLA/search?q={q}")]
-        Task<SearchResult> GetItems(
-            [AliasAs("q")]string filter);
+        //[Get("/sites/MLA/search?q={q}")]
+        //Task<SearchResult> GetItems(
+        //    [AliasAs("q")]string filter
+        //    );
 
         [Get("/items/{Item_id}/description")]
         Task<LargeDescription> GetItemLargeDescription(string Item_id);
+
+        [Get("/sites/MLA/search")]
+        Task<SearchResult> SearchItems(
+            [AliasAs("q")]string filter,
+            int? offset,
+            int? limit
+        );
     }
 }

@@ -19,7 +19,7 @@
 </head>
 <body style="background-color : #e6e6e6">
     <form runat="server">
-        <asp:ScriptManager runat="server">
+        <asp:ScriptManager runat="server" EnableViewState="True">
             <Scripts>
                 <%--To learn more about bundling scripts in ScriptManager see https://go.microsoft.com/fwlink/?LinkID=301884 --%>
                 <%--Framework Scripts--%>
@@ -43,19 +43,29 @@
                 <img runat="server" src="~/Images/Instagram-icon.png" width="30" height="30" class="d-inline-block align-top" alt="" />
                 Shop
             </a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <form class="form-inline my-2 my-lg-0">
-                    <div class="input-group">
-                        <asp:TextBox runat="server" CssClass="form-control" ID="txtFilter" TabIndex="0"></asp:TextBox>
-                        <div class="input-group-append">
-                            <asp:LinkButton runat="server" CssClass="btn btn-outline-light my-2 my-sm-0" ID="lnkSearch" Text="Buscar" OnClick="lnkSearch_OnClick">
-                            </asp:LinkButton>                            
-                        </div>
-                    </div>
-                </form>
+            <div class="navbar-collapse collapse" id="navbarSupportedContent">
+                <asp:UpdatePanel runat="server">
+                    <ContentTemplate>
+                        <form class="mx-2 my-auto d-inline w-100">
+                            <div class="input-group">         
+                                <input runat="server" ID="txtFilter" style="width: 500px" class="form-control" type="text" TabIndex="0" placeholder="Buscar productos, marcas y más.." maxlength="120"/>
+                                <span class="input-group-append"> 
+                                    <button class="btn btn-outline-light my-2 my-sm-0" type="button" runat="server" ID="lnkSearch" onServerClick="lnkSearch_OnClick">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>                            
+                            </div>
+                        </form>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </div>
+            <div class="navbar-collapse d-none d-lg-block d-xl-none">
+                <a href="https://www.mercadopago.com.ar/tarjeta-mercadopago?utm_medium=referral&amp;utm_source=mercadolibre.com.ar&amp;utm_campaign=cobranded_acquisition_banner_exhibitor">
+                    <img src="https://http2.mlstatic.com/resources/deals/exhibitors_resources/mla-menu-desktop-notification-picture-890cfc0b-12cc-4122-8f68-db91a3707541.png" title="Comprá Sin intereses" width="350px">
+                </a>
             </div>
         </nav>        
         <div class="container card">
@@ -64,10 +74,9 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - Shop</p>
+                <p>2019 - Shop</p>
             </footer>
-        </div>
-
+        </div>                       
     </form>
     <script type="text/javascript">
         function button_click(objTextBox,objBtnID)

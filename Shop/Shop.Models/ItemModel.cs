@@ -21,11 +21,5 @@ namespace Shop.Models
             IExternalService consultaExternalService = new ExternalServiceMercadoLibre();
             return consultaExternalService.GetItemLargeDescription(itemId);
         }
-
-        public SearchResult GetItems(string q)
-        {
-            IExternalService consultaExternalService = new ExternalServiceMercadoLibre();
-            return consultaExternalService.GetItems(q);
-        }
     }
 }

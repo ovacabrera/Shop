@@ -46,7 +46,7 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text">Cantidad:</span>
                 </div>
-                <input type="text" class="form-control" aria-label="" value="1">
+                <input runat="server" ID="txtQuantity" type="number" class="form-control" aria-label="" value="1" min="1" max="">
                 <div class="input-group-append">
                     <span class="input-group-text" runat="server" ID="txtAvailableQuantity"></span>
                 </div>

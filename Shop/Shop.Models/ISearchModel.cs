@@ -7,11 +7,8 @@ using Shop.Entities;
 
 namespace Shop.Models
 {
-    public interface IItemModel
+    public interface ISearchModel
     {
-        Item GetItem(string id);
-
-        LargeDescription GetLargeDescription(string itemId);
-
+        SearchResult SearchItems(string filter, int? offset, int? limit);
     }
 }

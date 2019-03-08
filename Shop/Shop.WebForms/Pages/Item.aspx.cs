@@ -44,6 +44,8 @@ namespace Shop.WebForms.Pages
                 txtAvailableQuantity.InnerText = "(" + item.available_quantity.ToString() +
                                                  (item.available_quantity == 1 ? " Disponible" : " Disponibles") + ")";
 
+                txtQuantity.Attributes.Add("max", item.available_quantity.ToString());
+
                 Entities.LargeDescription description = model.GetLargeDescription(id);
                 if (description != null)
                 {
