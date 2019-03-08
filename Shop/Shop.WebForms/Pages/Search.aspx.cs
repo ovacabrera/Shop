@@ -15,9 +15,14 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        private ISearchModel model;
-        private SearchResult searchResult;
-        private int limit = 3;
+        private ISearchModel _model;
+        private int _itemsPerPage = 50;
+        private string filterParamName = "q";
+        private string _pageNumberParamName = "p";
+        public string PageNumberParamName
+        {
+            get { return _pageNumberParamName; }
+        }
 
         #endregion
 
@@ -25,27 +30,38 @@ namespace Shop.WebForms.Pages
 
         private void Find()
         {
-            //GetParameters
-            string filter = ((Page.Request.Params["q"]) == null)
-                ? string.Empty
-                : Convert.ToString(Page.Request.Params["q"].ToString());
+            string filter;
+            int pageNumber;
+            GetParameters(out filter, out pageNumber);
 
-            string p = ((Page.Request.Params["p"]) == null)
-                ? string.Empty
-                : Convert.ToString(Page.Request.Params["p"].ToString());
+            //Set hidden field to help Paginator Item on Aspx page.
+            hfCurrentPage.Value = pageNumber.ToString();
 
-            int pageNumberInside = 1;
-            if (p != string.Empty)
+            _model = new SearchModel();
+            SearchResult searchResult = _model.SearchItems(filter, (pageNumber - 1)*_itemsPerPage, _itemsPerPage);
+
+            BindResults(searchResult);
+        }
+
+        private void GetParameters(out string filter, out int pageNumberInside)
+        {
+            filter = ((Page.Request.Params[filterParamName]) == null)
+                ? string.Empty
+                : Convert.ToString(Page.Request.Params[filterParamName].ToString());
+
+            string pageNumber = ((Page.Request.Params[PageNumberParamName]) == null)
+                ? string.Empty
+                : Convert.ToString(Page.Request.Params[PageNumberParamName].ToString());
+
+            pageNumberInside = 1;
+            if (pageNumber != string.Empty)
             {
-                pageNumberInside = Convert.ToInt32(p);
+                pageNumberInside = Convert.ToInt32(pageNumber);
             }
+        }
 
-            hfCurrentPage.Value = pageNumberInside.ToString();
-            //Current Method
-            model = new SearchModel();
-            searchResult = model.SearchItems(filter, (pageNumberInside-1)*limit, limit);
-
-            //BindResults
+        private void BindResults(SearchResult searchResult)
+        {
             if (searchResult != null && searchResult.results.Count > 0)
             {
                 rpItems.Visible = true;
@@ -55,30 +71,17 @@ namespace Shop.WebForms.Pages
                 rpItems.DataBind();
 
                 //PagingManager
-                int totalPages = Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.paging.total) / Convert.ToDecimal(limit)));
-
+                int totalPages =
+                    Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.paging.total) /
+                                                    Convert.ToDecimal(_itemsPerPage)));
+                //Set hidden field to help Paginator Item on Aspx page.
                 hfTotalPages.Value = totalPages.ToString();
-                //List<Tuple<int,bool>> pageItems = new List<Tuple<int, bool>>();
-
-                //int startRangePage = 1; //pageNumber < pageButtonsQuantity ? 1 : pageNumber;
-                //int endRangePage = totalPages; //(pageNumber + pageButtonsQuantity - 1) <= totalPages ? (pageNumber + pageButtonsQuantity - 1) : totalPages;
-
-                //for (int i = startRangePage; i <= endRangePage; i++)
-                //{
-                //    pageItems.Add(new Tuple<int, bool>(i, i == pageNumber));
-                //}
-
-                //rpPager.DataSource = pageItems;
-                //rpPager.DataBind();
-
             }
             else
             {
                 rpItems.Visible = false;
                 divNoResults.Visible = true;
             }
-                    
-
         }
 
         #endregion
@@ -93,26 +96,6 @@ namespace Shop.WebForms.Pages
             }
         }
 
-        protected void lnkPager_OnClick(object sender, EventArgs e)
-        {
-            //string pageNumberParameter = ((System.Web.UI.HtmlControls.HtmlAnchor) sender).Name;
-            //int pageNumber = 0;
-            //if (int.TryParse(pageNumberParameter, out pageNumber))
-            //{
-            //    Find(pageNumber);
-            //}
-        }
-
         #endregion
-
-        protected void btnGoToPage_OnClick(object sender, EventArgs e)
-        {
-            //string pageNumberParameter = hfCurrentPage.Value;
-            //int pageNumber = 0;
-            //if (int.TryParse(pageNumberParameter, out pageNumber))
-            //{
-            //    Find(pageNumber);
-            //}
-        }
     }
 }

@@ -11,7 +11,7 @@
                  <asp:Repeater runat="server" ID="rpItems">
                      <ItemTemplate>
                          <div class="col-sm-12 col-lg-4">
-                             <div class="card h-100" style="width: 18rem;" onclick="Comprar('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
+                             <div class="card h-100" style="width: 18rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
                                  <img class="card-img-top" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
                                  <div class="card-body">
                                      <p class="card-text"><%# ((Shop.Entities.Result)Container.DataItem).title %></p>
@@ -46,11 +46,12 @@
             total: $("#<%= hfTotalPages.ClientID %>").val(),
             maxVisible: 8,
             page: $("#<%= hfCurrentPage.ClientID %>").val(),
-
             leaps: true,
             firstLastUse: true,
             first: '←',
             last: '→',
+            next: 'Siguiente',
+            prev: 'Anterior',
             wrapClass: 'pagination',
             activeClass: 'active',
             disabledClass: 'disabled',
@@ -58,14 +59,13 @@
             prevClass: 'prev',
             lastClass: 'last',
             firstClass: 'first'
-
-        }).on("page", function(event, /* page number here */ num){
+        }).on("page", function (event, /* page number here */ num) {            
             var str = window.location.href;
             str = replaceQueryParam('p', num, str);                    
             window.location.href = str;
         });
 
-        function Comprar(id) {
+        function GoToItemPage(id) {
             window.location.href = 'Item.aspx?id='+id;
         };
 
@@ -74,16 +74,6 @@
             var query = search.replace(regex, "$1").replace(/&$/, '');
 
             return (query.length > 2 ? query + "&" : "?") + (newval ? param + "=" + newval : '');
-        }
-
-        function GetParamValue(param) {
-            var url = new URL(window.location.href);
-            var paramValue = url.searchParams.get(param);
-            if (paramValue != '') {
-                return paramValue;
-            } else {
-                return 1;
-            }
         }
     </script>
     
