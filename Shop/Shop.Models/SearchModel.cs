@@ -1,13 +1,7 @@
 ﻿using Shop.CrossCutting;
 using Shop.Entities;
-using Shop.ExternalServices;
 using Shop.ExternalServices.Interfaces;
 using Shop.Models.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Shop.Models
 {
@@ -15,8 +9,30 @@ namespace Shop.Models
     {
         public SearchResult SearchItems(string filter, int? offset, int? limit)
         {
-            IExternalService consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
+            if (!ValidateSearchItemsParameters(filter, offset, limit)) return null;
+
+            var consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
             return consultaExternalService.SearchItems(filter, offset, limit);
+        }
+
+        public bool ValidateSearchItemsParameters(string filter, int? offset, int? limit)
+        {
+            if (filter.Trim() == string.Empty)
+            {
+                return false;
+            }
+
+            if (offset.HasValue && offset < 0)
+            {
+                return false;
+            }
+
+            if (limit.HasValue && limit < 0)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }
