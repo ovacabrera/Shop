@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Shop.CrossCutting;
 using Shop.Models;
 
 namespace Shop.WebForms.Pages
@@ -30,7 +31,7 @@ namespace Shop.WebForms.Pages
             string id = ((Page.Request.Params["id"]) == null)
                 ? string.Empty
                 : Convert.ToString(Page.Request.Params["id"]);
-            model = new ItemModel();
+            model = IoC.GetObjectModel<IItemModel>();
             Entities.Item item = model.GetItem(id);
             if (item != null)
             {

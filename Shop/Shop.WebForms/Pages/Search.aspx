@@ -61,7 +61,7 @@
             firstClass: 'first'
         }).on("page", function (event, /* page number here */ num) {            
             var str = window.location.href;
-            str = replaceQueryParam('p', num, str);                    
+            str = replaceQueryParam(<%= "'"+this.PageNumberParamName+"'" %>, num, str);                    
             window.location.href = str;
         });
 

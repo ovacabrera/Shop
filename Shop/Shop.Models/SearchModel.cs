@@ -1,4 +1,5 @@
-﻿using Shop.Entities;
+﻿using Shop.CrossCutting;
+using Shop.Entities;
 using Shop.ExternalServices;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Shop.Models
     {
         public SearchResult SearchItems(string filter, int? offset, int? limit)
         {
-            IExternalService consultaExternalService = new ExternalServiceMercadoLibre();
+            IExternalService consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
             return consultaExternalService.SearchItems(filter, offset, limit);
         }
     }

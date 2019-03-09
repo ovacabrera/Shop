@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Shop.CrossCutting;
 using Shop.Entities;
 using Shop.Models;
 
@@ -37,7 +38,7 @@ namespace Shop.WebForms.Pages
             //Set hidden field to help Paginator Item on Aspx page.
             hfCurrentPage.Value = pageNumber.ToString();
 
-            _model = new SearchModel();
+            _model = IoC.GetObjectModel<ISearchModel>();
             SearchResult searchResult = _model.SearchItems(filter, (pageNumber - 1)*_itemsPerPage, _itemsPerPage);
 
             BindResults(searchResult);
