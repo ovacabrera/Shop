@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Search.aspx.cs" Inherits="Shop.WebForms.Pages.Search" %>
 <%@ OutputCache Location="None"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <script src="<%: ResolveUrl("~/Scripts/jquery.twbsPagination.js") %>"  type="text/javascript"></script>
     <script src="<%: ResolveUrl("~/Scripts/jquery.bootpag.min.js") %>"  type="text/javascript"></script>
      <div class="container">
          <div class="col-md-2">
@@ -47,11 +46,9 @@
             maxVisible: 8,
             page: $("#<%= hfCurrentPage.ClientID %>").val(),
             leaps: true,
-            firstLastUse: true,
-            first: '←',
-            last: '→',
-            next: 'Siguiente',
-            prev: 'Anterior',
+            firstLastUse: false,
+            next: '→',
+            prev: '←',
             wrapClass: 'pagination',
             activeClass: 'active',
             disabledClass: 'disabled',
