@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Shop.CrossCutting;
 using Shop.Entities;
-using Shop.ExternalServices;
+using Shop.ExternalServices.Interfaces;
+using Shop.Models.Interfaces;
 
 namespace Shop.Models
 {
@@ -12,13 +9,13 @@ namespace Shop.Models
     {
         public Item GetItem(string id)
         {
-            IExternalService consultaExternalService = new ExternalServiceMercadoLibre();
+            IExternalService consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
             return consultaExternalService.GetItem(id);
         }
 
         public LargeDescription GetLargeDescription(string itemId)
         {
-            IExternalService consultaExternalService = new ExternalServiceMercadoLibre();
+            IExternalService consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
             return consultaExternalService.GetItemLargeDescription(itemId);
         }
     }

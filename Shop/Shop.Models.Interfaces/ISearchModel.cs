@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Shop.Entities;
 
-namespace Shop.Models
+namespace Shop.Models.Interfaces
 {
     public interface ISearchModel
     {

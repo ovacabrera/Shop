@@ -1,6 +1,8 @@
 ﻿using Shop.CrossCutting;
 using Shop.Entities;
 using Shop.ExternalServices;
+using Shop.ExternalServices.Interfaces;
+using Shop.Models.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;

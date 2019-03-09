@@ -316,8 +316,16 @@
       <Project>{A9412570-090B-4A9C-8305-4E6B121B9C84}</Project>
       <Name>Shop.Entities</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shop.ExternalServices\Shop.ExternalServices.csproj">
+      <Project>{30e25b2d-cea3-4c0f-a703-8be4e48633ec}</Project>
+      <Name>Shop.ExternalServices</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.Models.Interfaces\Shop.Models.Interfaces.csproj">
+      <Project>{7837594D-9100-4011-B220-1B350D60541E}</Project>
+      <Name>Shop.Models.Interfaces</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shop.Models\Shop.Models.csproj">
-      <Project>{C3CCEFDD-9571-43F2-B9EC-8BCD708E5D03}</Project>
+      <Project>{c3ccefdd-9571-43f2-b9ec-8bcd708e5d03}</Project>
       <Name>Shop.Models</Name>
     </ProjectReference>
   </ItemGroup>

@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using Shop.CrossCutting;
 using Shop.Models;
+using Shop.Models.Interfaces;
 
 namespace Shop.WebForms.Pages
 {

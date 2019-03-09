@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Shop.Entities;
 
-namespace Shop.ExternalServices
+namespace Shop.ExternalServices.Interfaces
 {
     public interface IExternalService
     {

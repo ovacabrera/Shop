@@ -1,14 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Services;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using Shop.CrossCutting;
 using Shop.Entities;
-using Shop.Models;
-
+using Shop.Models.Interfaces;
 
 namespace Shop.WebForms.Pages
 {

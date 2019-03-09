@@ -1,6 +1,7 @@
 ﻿using System;
 using Refit;
 using Shop.Entities;
+using Shop.ExternalServices.Interfaces;
 using Shop.ExternalServices.IRetrofit;
 
 namespace Shop.ExternalServices

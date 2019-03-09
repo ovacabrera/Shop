@@ -67,7 +67,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExternalServiceMercadoLibre.cs" />
-    <Compile Include="IExternalService.cs" />
     <Compile Include="IRetrofit\IMercadoLibreApi.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -75,6 +74,10 @@
     <ProjectReference Include="..\Shop.Entities\Shop.Entities.csproj">
       <Project>{A9412570-090B-4A9C-8305-4E6B121B9C84}</Project>
       <Name>Shop.Entities</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Shop.ExternalServices.Interfaces\Shop.ExternalServices.Interfaces.csproj">
+      <Project>{FF6FC385-B601-492A-A2B2-0BD6B1D463DB}</Project>
+      <Name>Shop.ExternalServices.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
