@@ -2,15 +2,14 @@
 <%@ OutputCache Location="None"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="<%: ResolveUrl("~/Scripts/jquery.bootpag.min.js") %>"  type="text/javascript"></script>
-     <div class="container">
-         <div class="col-md-12 p-1">
+         <div class="col-md-12">
              <div class="row">
                  <asp:Repeater runat="server" ID="rpItems">
                      <ItemTemplate>
-                         <div class="col-sm-6 col-lg-4">
-                             <div class="card" style="width: 15rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
+                         <div class="col-6 col-sm-4 col-lg-2">
+                             <div class="card" style="width: 10rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
                                  <div class="d-flex justify-content-center">
-                                     <img class="card-img-top h-50 w-50" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
+                                     <img class="card-img-top h-100 w-100" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
                                  </div>
                                  <hr/>
                                  <div class="card-body">
@@ -19,6 +18,7 @@
                                      <p class="card-text"><%# ((Shop.Entities.Result)Container.DataItem).title %></p>                                     
                                  </div>
                              </div>
+                             <br/>
                          </div>
                      </ItemTemplate>
                  </asp:Repeater>
@@ -36,11 +36,8 @@
                  </nav>
              </div>
          </div>
-     </div>                 
-
     <asp:HiddenField runat="server" ID="hfCurrentPage" EnableViewState="True"/>
-    <asp:HiddenField runat="server" ID="hfTotalPages" EnableViewState="True"/>
-    
+    <asp:HiddenField runat="server" ID="hfTotalPages" EnableViewState="True"/>    
     <script type="text/javascript" language="javascript">
 
         $('#paginationNav').bootpag({
