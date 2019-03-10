@@ -20,7 +20,10 @@ namespace Shop.WebForms.Pages
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            ShowItem();
+            if (!Page.IsPostBack)
+            {
+                ShowItem();
+            }
         }
 
         #endregion

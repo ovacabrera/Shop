@@ -56,6 +56,6 @@ namespace Shop.Entities
         public bool automatic_relist { get; set; }
         public DateTime date_created { get; set; }
         public DateTime last_updated { get; set; }
-        public double health { get; set; }
+        public double? health { get; set; }
     }
 }

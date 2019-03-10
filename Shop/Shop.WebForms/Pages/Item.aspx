@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Item.aspx.cs" Inherits="Shop.WebForms.Pages.Item" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
-    <div runat="server" ID="divItem">
+    <div runat="server" ID="divItem" class="card" style="background-color: white;">
     <div class="row">
         <div class="col-md-8">
             <div id="carouselExampleIndicators" class="carousel card" data-ride="carousel">
@@ -33,7 +33,7 @@
                 
             </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-4 p-1 pl-3">
             <p runat="server" ID="txtSoldQuantity"></p>
             <h3 class="my-3" runat="server" ID="txtTitulo"></h3>
             <h3 class="my-3" runat="server" ID="txtPrecio"></h3>            
@@ -42,23 +42,23 @@
                 <li>Envío $ 1</li>
                 <li>Devolución gratis</li>
             </ul>
-            <div class="input-group mb-3">
+            <div class="input-group input-group-sm mb-3">
                 <div class="input-group-prepend">
                     <span class="input-group-text">Cantidad:</span>
                 </div>
-                <input runat="server" ID="txtQuantity" type="number" class="form-control" aria-label="" value="1" min="1" max="">
+                <input runat="server" ID="txtQuantity" type="number" class="form-control col-4" aria-label="" value="1" min="1" max="" />
                 <div class="input-group-append">
-                    <span class="input-group-text" runat="server" ID="txtAvailableQuantity"></span>
+                    <small class="input-group-text" runat="server" ID="txtAvailableQuantity"></small>
                 </div>
             </div>
             <button type="button" class="btn btn-primary">Comprar ahora</button>
             <button type="button" class="btn btn-outline-primary">Agregar al carrito</button>
         </div>
     </div>
-    <div class="row" style="padding: 10px">
+    <div class="row pl-4">
         <h2 class="my-4">Características</h2>
     </div>
-    <div class="row" style="padding: 15px" >
+    <div class="row pl-3" >
         <asp:Repeater runat="server" ID="rpCharacterists">
             <ItemTemplate>
                 <div class="col-md-6">
@@ -70,22 +70,14 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
-    <div class="row" style="padding: 10px">
-        <h2 class="my-4">Descripción
-            <%--<small>Secondary Text</small>--%>
-        </h2>
+    <div class="row pl-4">
+        <h2 class="my-4">Descripción</h2>
     </div>
-    <div class="row" style="padding: 15px">
-        <p runat="server" ID="txtDescription">
-
-        </p>
+    <div class="row pl-3">
+        <p runat="server" ID="txtDescription"></p>
     </div>
     </div>
     <div runat="server" class="jumbotron" ID="divNoItem">
         <h2>No hay publicaciones que coincidan con tu búsqueda.</h2>
     </div>
-    
-    <script type="text/javascript">
-
-    </script>
 </asp:Content>
