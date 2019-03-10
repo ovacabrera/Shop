@@ -3,18 +3,20 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="MainContent" runat="server">
     <script src="<%: ResolveUrl("~/Scripts/jquery.bootpag.min.js") %>"  type="text/javascript"></script>
      <div class="container">
-         <div class="col-md-2">
-         </div>
-         <div class="col-md-10">
+         <div class="col-md-12 p-1">
              <div class="row">
                  <asp:Repeater runat="server" ID="rpItems">
                      <ItemTemplate>
-                         <div class="col-sm-12 col-lg-4">
-                             <div class="card h-100" style="width: 18rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
-                                 <img class="card-img-top" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
+                         <div class="col-sm-6 col-lg-4">
+                             <div class="card" style="width: 15rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
+                                 <div class="d-flex justify-content-center">
+                                     <img class="card-img-top h-50 w-50" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
+                                 </div>
+                                 <hr/>
                                  <div class="card-body">
-                                     <p class="card-text"><%# ((Shop.Entities.Result)Container.DataItem).title %></p>
-                                     <h5 class="card-title"><%# "$ "+ ((Shop.Entities.Result)Container.DataItem).price.ToString("N") %></h5>                            
+                                     <h5 class="card-title"><%# "$ "+ ((Shop.Entities.Result)Container.DataItem).price.ToString("N") %></h5>                                                                 
+                                     <small class="<%# "text-success " + (((Shop.Entities.Result)Container.DataItem).shipping.free_shipping ? "visible" : "invisible") %>" >Envío Gratis</small>
+                                     <p class="card-text"><%# ((Shop.Entities.Result)Container.DataItem).title %></p>                                     
                                  </div>
                              </div>
                          </div>
@@ -43,7 +45,7 @@
 
         $('#paginationNav').bootpag({
             total: $("#<%= hfTotalPages.ClientID %>").val(),
-            maxVisible: 8,
+            maxVisible: 7,
             page: $("#<%= hfCurrentPage.ClientID %>").val(),
             leaps: true,
             firstLastUse: false,
