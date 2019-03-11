@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using Shop.Entities;
+﻿using Shop.Entities;
 
 namespace Shop.ExternalServices.Interfaces
 {

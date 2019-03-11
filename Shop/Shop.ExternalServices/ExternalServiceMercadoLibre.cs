@@ -18,42 +18,20 @@ namespace Shop.ExternalServices
 
         public Item GetItem(string id)
         {
-            try
-            {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-
-                return mercadoLibreApi.GetItem(id).Result;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
+            return mercadoLibreApi.GetItem(id).Result;
         }
 
         public LargeDescription GetItemLargeDescription(string id)
         {
-            try
-            {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-                return mercadoLibreApi.GetItemLargeDescription(id).Result;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
+            return mercadoLibreApi.GetItemLargeDescription(id).Result;
         }
 
         public SearchResult SearchItems(string filter, int? offset, int? limit)
         {
-            try
-            {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-                return mercadoLibreApi.SearchItems(filter,offset,limit).Result;
-            }
-            catch (Exception e)
-            {
-                return null;
-            }
+            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
+            return mercadoLibreApi.SearchItems(filter,offset,limit).Result;
         }
     }
 }

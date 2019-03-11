@@ -10,7 +10,7 @@ namespace Shop.CrossCutting.Log
 
         public Log4NetLoggerService()
         {            
-            _logger = log4net.LogManager.GetLogger(typeof(Logger));
+            _logger = LogManager.GetLogger(typeof(Logger));
             if (!_logger.Logger.Repository.Configured)
             {
                 log4net.Config.XmlConfigurator.Configure();

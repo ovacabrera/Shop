@@ -24,6 +24,7 @@
                  </asp:Repeater>
              </div>
              <div class="jumbotron" runat="server" id="divNoResults">
+                 <i class="fa fa-search"></i>
                  <h2>No hay publicaciones que coincidan con tu búsqueda.</h2>
                  <p class="lead">Revisá la ortografía de la palabra.</p>
                  <p class="lead">Utilizá palabras más genéricas o menos palabras.</p>
