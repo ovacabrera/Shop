@@ -33,7 +33,7 @@
                 
             </div>
         </div>
-        <div class="col-md-4 ml-1">
+        <div class="col-md-4">
             <p runat="server" ID="txtSoldQuantity" class="text-muted"></p>
             <h3 class="my-3" runat="server" ID="txtTitulo"></h3>
             <h3 class="my-3" runat="server" ID="txtPrecio"></h3>            
