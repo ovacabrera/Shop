@@ -7,12 +7,18 @@ namespace Shop.Models
 {
     public class SearchModel : ISearchModel
     {
+        private IExternalService _externalService;
+
+        public SearchModel(IExternalService externalService)
+        {
+            _externalService = externalService;
+        }
+
         public SearchResult SearchItems(string filter, int? offset, int? limit)
         {
             if (!ValidateSearchItemsParameters(filter, offset, limit)) return null;
 
-            var consultaExternalService = IoC.GetObjectExternalService<IExternalService>();
-            return consultaExternalService.SearchItems(filter, offset, limit);
+            return _externalService.SearchItems(filter, offset, limit);
         }
 
         public bool ValidateSearchItemsParameters(string filter, int? offset, int? limit)

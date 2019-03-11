@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using Refit;
 using Shop.Entities;
 using Shop.ExternalServices.Interfaces;
@@ -8,11 +9,18 @@ namespace Shop.ExternalServices
 {
     public class ExternalServiceMercadoLibre : IExternalService
     {
+        private string _url;
+
+        public ExternalServiceMercadoLibre()
+        {
+            _url = ConfigurationManager.AppSettings["APIMercadoLibre"];
+        }
+
         public Item GetItem(string id)
         {
             try
             {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>("https://api.mercadolibre.com");
+                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
 
                 return mercadoLibreApi.GetItem(id).Result;
             }
@@ -26,7 +34,7 @@ namespace Shop.ExternalServices
         {
             try
             {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>("https://api.mercadolibre.com");
+                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
                 return mercadoLibreApi.GetItemLargeDescription(id).Result;
             }
             catch (Exception e)
@@ -39,7 +47,7 @@ namespace Shop.ExternalServices
         {
             try
             {
-                var mercadoLibreApi = RestService.For<IMercadoLibreApi>("https://api.mercadolibre.com");
+                var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
                 return mercadoLibreApi.SearchItems(filter,offset,limit).Result;
             }
             catch (Exception e)

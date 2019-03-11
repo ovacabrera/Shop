@@ -1,5 +1,7 @@
-﻿using Microsoft.Practices.Unity.Configuration;
+﻿using System;
+using Microsoft.Practices.Unity.Configuration;
 using Unity;
+using Unity.Injection;
 
 
 namespace Shop.CrossCutting
@@ -39,6 +41,22 @@ namespace Shop.CrossCutting
             }
         }
 
+        private static IUnityContainer _loggerServiceContainer;
+
+        private static IUnityContainer LoggerService
+        {
+            get
+            {
+                if (_loggerServiceContainer == null)
+                {
+                    _loggerServiceContainer = new UnityContainer();
+                    _loggerServiceContainer.LoadConfiguration("loggerServiceContainer");
+                }
+
+                return _loggerServiceContainer;
+            }
+        }
+
 
         public static T GetObjectModel<T>()
         {
@@ -48,6 +66,11 @@ namespace Shop.CrossCutting
         public static T GetObjectExternalService<T>()
         {
             return ExternalServiceContainer.Resolve<T>();
+        }
+
+        public static T GetLogger<T>()
+        {
+            return LoggerService.Resolve<T>();
         }
     }
 }

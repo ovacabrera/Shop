@@ -7,7 +7,7 @@
                  <asp:Repeater runat="server" ID="rpItems">
                      <ItemTemplate>
                          <div class="col-6 col-sm-4 col-lg-2">
-                             <div class="card" style="width: 10rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
+                             <div class="card shadow" style="width: 10rem;" onclick="GoToItemPage('<%# ((Shop.Entities.Result)Container.DataItem).id %>');">
                                  <div class="d-flex justify-content-center">
                                      <img class="card-img-top h-100 w-100" src='<%# ((Shop.Entities.Result)Container.DataItem).thumbnail %>'>
                                  </div>

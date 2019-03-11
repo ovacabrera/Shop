@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace Shop.WebForms
 {
@@ -13,10 +9,10 @@ namespace Shop.WebForms
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            this.txtFilter.Attributes.Add(
-                "onkeypress", "button_click(this,'" + this.lnkSearch.ClientID + "')");
+            txtFilter.Attributes.Add(
+                "onkeypress", "button_click(this,'" + lnkSearch.ClientID + "')");
 
-            this.txtFilter.Focus();
+            txtFilter.Focus();
         }
 
         protected void lnkSearch_OnClick(object sender, EventArgs e)

@@ -7,20 +7,25 @@ namespace Shop.Models
 {
     public class ItemModel : IItemModel
     {
+        private IExternalService _externalService;
+
+        public ItemModel(IExternalService externalService)
+        {
+            _externalService = externalService;
+        }
+
         public Item GetItem(string itemId)
         {
             if (!ValidateItemIdParameter(itemId)) return null;
 
-            var externalService = IoC.GetObjectExternalService<IExternalService>();
-            return externalService.GetItem(itemId);
+            return _externalService.GetItem(itemId);
         }
 
         public LargeDescription GetLargeDescription(string itemId)
         {
             if (!ValidateItemIdParameter(itemId)) return null;
 
-            var externalService = IoC.GetObjectExternalService<IExternalService>();
-            return externalService.GetItemLargeDescription(itemId);
+            return _externalService.GetItemLargeDescription(itemId);
         }
 
         public bool ValidateItemIdParameter(string itemId)

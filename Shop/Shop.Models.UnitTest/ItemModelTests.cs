@@ -1,4 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using Shop.Entities;
+using Shop.ExternalServices.Interfaces;
 
 namespace Shop.Models.UnitTest
 {
@@ -9,8 +12,8 @@ namespace Shop.Models.UnitTest
         public void ValidateItemIdParameter_ItemIdIsStringEmpty_ReturnsFalse()
         {
             #region Arrange
-
-            ItemModel model = new ItemModel();
+            var externalService = new Mock<IExternalService>();
+            ItemModel model = new ItemModel(externalService.Object);
 
             #endregion
 
@@ -29,11 +32,11 @@ namespace Shop.Models.UnitTest
         }
 
         [TestMethod]
-        public void ValidateItemIdParameter_ItemHasAValue_ReturnsTrue()
+        public void ValidateItemIdParameter_ItemIdHasAValue_ReturnsTrue()
         {
             #region Arrange
-
-            ItemModel model = new ItemModel();
+            var externalService = new Mock<IExternalService>();
+            ItemModel model = new ItemModel(externalService.Object);
 
             #endregion
 
@@ -46,6 +49,37 @@ namespace Shop.Models.UnitTest
             #region Assert
 
             Assert.IsTrue(validate);
+
+            #endregion
+
+        }
+
+        [TestMethod]
+        public void GetItem_MockedExternalServiceWith1ItemIDxxx_ReturnsItemIDxxx()
+        {
+            #region Arrange
+
+            const string itemId = "xxx";
+            var mockedItem = new Item {id = itemId};
+
+            var externalService = new Mock<IExternalService>();
+            externalService.Setup(m => m.GetItem(itemId))
+                .Returns(mockedItem);
+
+            var model = new ItemModel(externalService.Object);
+
+            #endregion
+
+            #region Act
+
+            var item = model.GetItem(itemId);
+
+            #endregion
+
+            #region Assert
+
+            Assert.IsNotNull(item);
+            Assert.AreEqual(itemId,item.id);
 
             #endregion
 
