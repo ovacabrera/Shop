@@ -29,7 +29,6 @@ namespace Shop.WebForms
         {
             var container = this.AddUnity();
             container.RegisterType<IExternalService, ExternalServiceMercadoLibre>();
-            container.RegisterType<ISearchModel, SearchModel>();
             container.RegisterType<IItemModel, ItemModel>();
             container.RegisterType<ILoggerService, Log4NetLoggerService>();
         }

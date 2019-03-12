@@ -4,24 +4,36 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Shop.CrossCutting;
+using Shop.CrossCutting.Log;
 using Shop.Entities;
+using Shop.ExternalServices;
+using Shop.ExternalServices.Interfaces;
 using Shop.Models;
+using Shop.Models.Interfaces;
 
 namespace Shop.Controllers
 {
     public class ItemController : Controller
     {
         // GET: Item
-        public string Index()
-        {
-            return "Nada";
-        }
+        public IActionResult Item(string id)
+        {            
+            IExternalService externalService = new ExternalServiceMercadoLibre();
+            ILoggerService loggerService = new Log4NetLoggerService();
+            IItemModel model = new ItemModel(externalService, loggerService);
 
-        public IActionResult Details(string id)
-        {
-            IItemModel model = new ItemModel();
+            loggerService.Action("UserX", "VER CCOMO OBTENEMOS ESTO", System.Reflection.MethodBase.GetCurrentMethod().Name, DateTime.Now);
+
             Item item = model.GetItem(id);
-            return View(item);
+            if (item != null)
+            {
+                return View(item);
+            }
+            else
+            {
+                return null;
+            }                                
         }
 
         //// GET: Item

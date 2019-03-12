@@ -9,7 +9,7 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        private ISearchModel _model;
+        private IItemModel _model;
         private ILoggerService _logger;
 
         private int _itemsPerPage = 50;
@@ -36,7 +36,7 @@ namespace Shop.WebForms.Pages
 
         #region Metods
 
-        public Search(ISearchModel model, ILoggerService logger)
+        public Search(IItemModel model, ILoggerService logger)
         {
             _model = model;
             _logger = logger;

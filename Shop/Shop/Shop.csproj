@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>Shop</AssemblyName>
   </PropertyGroup>
 
 
@@ -15,6 +16,8 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Shop.CrossCutting.Log\Shop.CrossCutting.Log.csproj" />
+    <ProjectReference Include="..\Shop.ExternalServices\Shop.ExternalServices.csproj" />
     <ProjectReference Include="..\Shop.Models\Shop.Models.csproj" />
   </ItemGroup>
 

@@ -62,7 +62,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="SearchModelTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ItemModelTests.cs" />
   </ItemGroup>
@@ -71,6 +70,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Shop.CrossCutting\Shop.CrossCutting.csproj">
+      <Project>{EE5259A4-4407-473E-A1F1-AC7FF29BEDC9}</Project>
+      <Name>Shop.CrossCutting</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Shop.Entities\Shop.Entities.csproj">
       <Project>{a9412570-090b-4a9c-8305-4e6b121b9c84}</Project>
       <Name>Shop.Entities</Name>

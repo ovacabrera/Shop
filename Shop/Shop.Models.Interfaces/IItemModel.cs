@@ -8,5 +8,7 @@ namespace Shop.Models.Interfaces
 
         LargeDescription GetLargeDescription(string itemId);
 
+        SearchResult SearchItems(string filter, int? offset, int? limit);
+
     }
 }

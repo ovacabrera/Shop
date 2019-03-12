@@ -50,5 +50,40 @@ namespace Shop.Models
         {
             return itemId.Trim() != string.Empty;
         }
+
+        public SearchResult SearchItems(string filter, int? offset, int? limit)
+        {
+            try
+            {
+                if (!ValidateSearchItemsParameters(filter, offset, limit)) return null;
+
+                return _externalService.SearchItems(filter, offset, limit);
+            }
+            catch (System.Exception ex)
+            {
+                _logger.Error(ex);
+                return null;
+            }
+        }
+
+        public bool ValidateSearchItemsParameters(string filter, int? offset, int? limit)
+        {
+            if (filter.Trim() == string.Empty)
+            {
+                return false;
+            }
+
+            if (offset.HasValue && offset < 0)
+            {
+                return false;
+            }
+
+            if (limit.HasValue && limit < 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
