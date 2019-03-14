@@ -11,7 +11,7 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        public IItemApplication ItemApplication => (IItemApplication)Application["IItemApplication"];
+        private readonly IItemApplication _itemApplication;
 
         private readonly ILoggerService _logger;
 
@@ -35,9 +35,10 @@ namespace Shop.WebForms.Pages
 
         #region Metods
 
-        public Search(ILoggerService logger)
+        public Search(ILoggerService logger, IItemApplication itemApplication)
         {            
             _logger = logger;
+            _itemApplication = itemApplication;
 
             Int32.TryParse(ConfigurationManager.AppSettings["SearchPageItemsPerPage"], out var quantity);
             _itemsPerPage = quantity;
@@ -59,7 +60,7 @@ namespace Shop.WebForms.Pages
                 //Set hidden field to help Paginator Item on Aspx page.
                 hfCurrentPage.Value = pageNumber.ToString();
                 string responseMessage = string.Empty;
-                SearchResultDTO searchResult = ItemApplication.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage, ref responseMessage);
+                SearchResultDTO searchResult = _itemApplication.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage, ref responseMessage);
 
                 BindResults(searchResult, responseMessage);
             }
