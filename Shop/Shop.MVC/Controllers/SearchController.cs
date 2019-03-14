@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Shop.Application.Interfaces;
 using Shop.DTOs;
 
@@ -23,8 +18,22 @@ namespace Shop.MVC.Controllers
         public IActionResult Index(string filter)
         {
             string responseMessage = string.Empty;
-            SearchResultDTO searchResult = _itemApplication.SearchItems(filter,null,null, ref responseMessage);
-            return View(searchResult.Results);
+            var searchResult = _itemApplication.SearchItems(filter,null,null, ref responseMessage);
+
+            if (searchResult == null)
+            {
+                return Content(responseMessage);
+            }
+
+            if (searchResult.Results.Count > 0)
+            {
+                return View(searchResult.Results);
+            }
+            else
+            {
+                return Content("No hay ítems que coincidan con tu búsqueda.");
+            }
+            
         }
 
         // GET: Search/Details/5
@@ -33,7 +42,16 @@ namespace Shop.MVC.Controllers
             string responseMessage = string.Empty;
             ItemDTO item = _itemApplication.GetItem(id, ref responseMessage);
 
-            return View(item);
+            if (item != null)
+            {
+                return View(item);
+            }
+            else
+            {
+                return Content(responseMessage);
+            }
+                    
+            
         }
 
     }
