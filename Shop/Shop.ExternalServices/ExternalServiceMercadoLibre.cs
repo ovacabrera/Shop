@@ -11,60 +11,53 @@ namespace Shop.ExternalServices
     public class ExternalServiceMercadoLibre : IExternalService
     {
         private string _url;
+        private IMercadoLibreApi _mercadoLibreApi;
 
         public ExternalServiceMercadoLibre(string url)
         {
             _url = url;
+            _mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
         }
 
         public ItemEntity GetItem(string id, ref string responseMessage)
         {
-            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-            HttpResponseMessage response = mercadoLibreApi.GetItem(id).Result;
+            HttpResponseMessage response = _mercadoLibreApi.GetItem(id).Result;
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<ItemEntity>(response.Content.ReadAsStringAsync().Result);
             }
-            else
-            {
-                ResponseMessageManager(out responseMessage, response);
-                return null;
-            }
+
+            ResponseMessageManager(out responseMessage, response.StatusCode);
+            return null;
         }
 
         public ItemLargeDescriptionEntity GetItemLargeDescription(string id, ref string responseMessage)
         {
-            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-            HttpResponseMessage response = mercadoLibreApi.GetItemLargeDescription(id).Result;
+            HttpResponseMessage response = _mercadoLibreApi.GetItemLargeDescription(id).Result;
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<ItemLargeDescriptionEntity>(response.Content.ReadAsStringAsync().Result);
             }
-            else
-            {
-                ResponseMessageManager(out responseMessage, response);
-                return null;
-            }               
+
+            ResponseMessageManager(out responseMessage, response.StatusCode);
+            return null;
         }
 
         public SearchResultEntity SearchItems(string filter, int? offset, int? limit, ref string responseMessage)
         {
-            var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
-            HttpResponseMessage response = mercadoLibreApi.SearchItems(filter, offset, limit).Result;
+            HttpResponseMessage response = _mercadoLibreApi.SearchItems(filter, offset, limit).Result;
             if (response.IsSuccessStatusCode)
             {
                 return JsonConvert.DeserializeObject<SearchResultEntity>(response.Content.ReadAsStringAsync().Result);
             }
-            else
-            {
-                ResponseMessageManager(out responseMessage, response);
-                return null;
-            }
+
+            ResponseMessageManager(out responseMessage, response.StatusCode);
+            return null;
         }
 
-        private static void ResponseMessageManager(out string responseMessage, HttpResponseMessage response)
+        private static void ResponseMessageManager(out string responseMessage, HttpStatusCode statusCode)
         {
-            switch (response.StatusCode)
+            switch (statusCode)
             {
                 case HttpStatusCode.Unauthorized:
                     responseMessage = "No tenés autorización para ver la página.";
@@ -76,13 +69,13 @@ namespace Shop.ExternalServices
                     responseMessage = "La consulta no puede ser realizada. Intente de nuevo en unos minutos.";
                     break;
                 case HttpStatusCode.InternalServerError:
-                    responseMessage = "Error interno del servidor. Código: " + response.StatusCode;
+                    responseMessage = "Error interno del servidor. Código: " + statusCode;
                     break;
                 case HttpStatusCode.ServiceUnavailable:
-                    responseMessage = "Servicio no disponible. Código: " + response.StatusCode;
+                    responseMessage = "Servicio no disponible. Código: " + statusCode;
                     break;
                 default:
-                    responseMessage = "Error Inesperado. Código: " + response.StatusCode;
+                    responseMessage = "Error Inesperado. Código: " + statusCode;
                     break;
             }
         }

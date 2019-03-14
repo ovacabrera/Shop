@@ -11,6 +11,8 @@ namespace Shop.Application.Automapper
         public ServiceProfile()
         {
             CreateMap<ItemEntity, ItemDTO>()
+                .ForMember(dest => dest.AvailableQuantity, opc => opc.MapFrom(src=>src.available_quantity))
+                .ForMember(dest => dest.SoldQuantity, opc => opc.MapFrom(src => src.sold_quantity))
                 .ForMember(dest => dest.ItemLargeDescription,
                     opc => opc.MapFrom(src => src.ItemLargeDescription == null ? string.Empty : src.ItemLargeDescription.plain_text))
                 .ForMember(dest => dest.PicturesUrl,

@@ -17,7 +17,7 @@ namespace Shop.WebForms.Pages
 
         private readonly int _itemsPerPage;
         private readonly string _filterParamName;
-        public string PageNumberParamName { get; } = "p";
+        public string PageNumberParamName { get; set; }
 
         #endregion
 
@@ -44,6 +44,8 @@ namespace Shop.WebForms.Pages
             _itemsPerPage = quantity;
 
             _filterParamName = ConfigurationManager.AppSettings["SearchPageFilterParamName"];
+
+            PageNumberParamName = ConfigurationManager.AppSettings["SearchPagePageNumberParamName"]; 
         }
 
         private void Find()
