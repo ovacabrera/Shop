@@ -28,9 +28,12 @@ namespace Shop.MVC.Controllers
         }
 
         // GET: Search/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+            string responseMessage = string.Empty;
+            ItemDTO item = _itemApplication.GetItem(id, ref responseMessage);
+
+            return View(item);
         }
 
     }

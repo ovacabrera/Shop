@@ -40,15 +40,6 @@ namespace Shop.MVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            //Action<Shop.MVC.ApplicationObjects> applicationObjects = (opt =>
-            //{
-            //    opt.itemApplication =
-            //        new ItemApplication(new ExternalServiceMercadoLibre("https://api.mercadolibre.com"),
-            //            new Log4NetLoggerService());
-            //});
-            //services.Configure(applicationObjects);
-            //services.AddSingleton(resolver => resolver.GetRequiredService<ApplicationObjects>());
-
             services.AddSingleton<IItemApplication>(new ItemApplication(
                 new ExternalServiceMercadoLibre("https://api.mercadolibre.com"),
                 new Log4NetLoggerService()));
@@ -77,6 +68,11 @@ namespace Shop.MVC
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
+
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Search}/{action=Index}/{filter?}");
+                
             });
         }
     }
