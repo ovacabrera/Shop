@@ -7,13 +7,13 @@ namespace Shop.ExternalServices.IRetrofit
     public interface IMercadoLibreApi
     {
         [Get("/items/{Item_id}")]
-        Task<Item> GetItem(string Item_id);
+        Task<ItemEntity> GetItem(string Item_id);
 
         [Get("/items/{Item_id}/description")]
-        Task<LargeDescription> GetItemLargeDescription(string Item_id);
+        Task<ItemLargeDescriptionEntity> GetItemLargeDescription(string Item_id);
 
         [Get("/sites/MLA/search")]
-        Task<SearchResult> SearchItems(
+        Task<SearchResultEntity> SearchItems(
             [AliasAs("q")]string filter,
             int? offset,
             int? limit

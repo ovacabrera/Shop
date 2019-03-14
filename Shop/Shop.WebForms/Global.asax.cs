@@ -4,6 +4,8 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Microsoft.AspNet.WebFormsDependencyInjection.Unity;
 using Microsoft.Practices.Unity.Configuration;
+using Shop.Application;
+using Shop.Application.Interfaces;
 using Shop.CrossCutting;
 using Shop.CrossCutting.Log;
 using Shop.ExternalServices;
@@ -29,8 +31,9 @@ namespace Shop.WebForms
         {
             var container = this.AddUnity();
             container.RegisterType<IExternalService, ExternalServiceMercadoLibre>();
-            container.RegisterType<IItemModel, ItemModel>();
+            container.RegisterType<IItemDomain, ItemDomain>();
             container.RegisterType<ILoggerService, Log4NetLoggerService>();
+            container.RegisterType<IItemApplication, ItemApplication>();
         }
     }
 }

@@ -16,19 +16,19 @@ namespace Shop.ExternalServices
             _url = ConfigurationManager.AppSettings["APIMercadoLibre"];
         }
 
-        public Item GetItem(string id)
+        public ItemEntity GetItem(string id)
         {
             var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
             return mercadoLibreApi.GetItem(id).Result;
         }
 
-        public LargeDescription GetItemLargeDescription(string id)
+        public ItemLargeDescriptionEntity GetItemLargeDescription(string id)
         {
             var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
             return mercadoLibreApi.GetItemLargeDescription(id).Result;
         }
 
-        public SearchResult SearchItems(string filter, int? offset, int? limit)
+        public SearchResultEntity SearchItems(string filter, int? offset, int? limit)
         {
             var mercadoLibreApi = RestService.For<IMercadoLibreApi>(_url);
             return mercadoLibreApi.SearchItems(filter,offset,limit).Result;

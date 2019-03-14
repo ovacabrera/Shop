@@ -57,7 +57,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ItemModel.cs" />
+    <Compile Include="ItemDomain.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

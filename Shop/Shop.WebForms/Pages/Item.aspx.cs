@@ -1,5 +1,7 @@
 ﻿using System;
+using Shop.Application.Interfaces;
 using Shop.CrossCutting;
+using Shop.DTOs;
 using Shop.Models.Interfaces;
 
 namespace Shop.WebForms.Pages
@@ -7,8 +9,9 @@ namespace Shop.WebForms.Pages
     public partial class Item : System.Web.UI.Page
     {
         #region Attributes
-        private IItemModel _model;
+        //private IItemDomain _model;
         private ILoggerService _logger;
+        private IItemApplication _application;
         #endregion
 
         #region Events
@@ -25,10 +28,11 @@ namespace Shop.WebForms.Pages
 
         #region Methods
 
-        public Item(IItemModel model, ILoggerService logger)
+        public Item(ILoggerService logger, IItemApplication application)
         {
-            _model = model;
+            //_model = model;
             _logger = logger;
+            _application = application;
         }
 
         private void ShowItem()
@@ -39,33 +43,30 @@ namespace Shop.WebForms.Pages
 
                 string id = (Page.Request.Params["id"]) == null ? string.Empty : Convert.ToString(Page.Request.Params["id"]);
 
-                Entities.Item item = _model.GetItem(id);
-                if (item != null)
+                //Entities.ItemEntity item = _model.GetItem(id);
+                ItemDTO itemDTO = _application.GetItem(id);
+                if (itemDTO != null)
                 {
                     divNoItem.Visible = false;
                     divItem.Visible = true;
 
-                    txtSoldQuantity.InnerText = item.sold_quantity > 0 ? item.sold_quantity.ToString() + " Vendidos" : "";
-                    txtTitulo.InnerText = item.title;
-                    txtPrecio.InnerText = "$ " + item.price.ToString("N");
+                    txtSoldQuantity.InnerText = itemDTO.sold_quantity > 0 ? itemDTO.sold_quantity.ToString() + " Vendidos" : "";
+                    txtTitulo.InnerText = itemDTO.title;
+                    txtPrecio.InnerText = "$ " + itemDTO.price.ToString("N");
 
-                    txtAvailableQuantity.InnerText = "(" + item.available_quantity.ToString() +
-                                                     (item.available_quantity == 1 ? " Disponible" : " Disponibles") + ")";
+                    txtAvailableQuantity.InnerText = "(" + itemDTO.available_quantity.ToString() +
+                                                     (itemDTO.available_quantity == 1 ? " Disponible" : " Disponibles") + ")";
 
-                    txtQuantity.Attributes.Add("max", item.available_quantity.ToString());
+                    txtQuantity.Attributes.Add("max", itemDTO.available_quantity.ToString());
 
-                    Entities.LargeDescription description = _model.GetLargeDescription(id);
-                    if (description != null)
-                    {
-                        txtDescription.InnerHtml = description.plain_text.Replace("\n", "<br />");
-                    }
+                    txtDescription.InnerHtml = itemDTO.itemLargeDescription.Replace("\n", "<br />");
 
-                    rpCharacterists.DataSource = item.attributes;
+                    rpCharacterists.DataSource = itemDTO.attributes;
                     rpCharacterists.DataBind();
 
-                    rpCarouselControls.DataSource = item.pictures;
+                    rpCarouselControls.DataSource = itemDTO.picturesUrl;
                     rpCarouselControls.DataBind();
-                    rpImages.DataSource = item.pictures;
+                    rpImages.DataSource = itemDTO.picturesUrl;
                     rpImages.DataBind();
                 }
                 else

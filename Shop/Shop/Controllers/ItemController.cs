@@ -21,11 +21,11 @@ namespace Shop.Controllers
         {            
             IExternalService externalService = new ExternalServiceMercadoLibre();
             ILoggerService loggerService = new Log4NetLoggerService();
-            IItemModel model = new ItemModel(externalService, loggerService);
+            IItem model = new Item(externalService, loggerService);
 
             loggerService.Action("UserX", "VER CCOMO OBTENEMOS ESTO", System.Reflection.MethodBase.GetCurrentMethod().Name, DateTime.Now);
 
-            Item item = model.GetItem(id);
+            ItemEntity item = model.GetItem(id);
             if (item != null)
             {
                 return View(item);

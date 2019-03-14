@@ -1,7 +1,7 @@
 ﻿using System;
+using Shop.Application.Interfaces;
 using Shop.CrossCutting;
-using Shop.Entities;
-using Shop.Models.Interfaces;
+using Shop.DTOs;
 
 namespace Shop.WebForms.Pages
 {
@@ -9,7 +9,7 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        private IItemModel _model;
+        private IItemApplication _application;
         private ILoggerService _logger;
 
         private int _itemsPerPage = 50;
@@ -36,9 +36,9 @@ namespace Shop.WebForms.Pages
 
         #region Metods
 
-        public Search(IItemModel model, ILoggerService logger)
+        public Search(IItemApplication application, ILoggerService logger)
         {
-            _model = model;
+            _application = application;
             _logger = logger;
         }
 
@@ -56,7 +56,7 @@ namespace Shop.WebForms.Pages
                 //Set hidden field to help Paginator Item on Aspx page.
                 hfCurrentPage.Value = pageNumber.ToString();                
 
-                SearchResult searchResult = _model.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage);
+                SearchResultDTO searchResult = _application.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage);
 
                 BindResults(searchResult);
             }
@@ -85,7 +85,7 @@ namespace Shop.WebForms.Pages
             }
         }
 
-        private void BindResults(SearchResult searchResult)
+        private void BindResults(SearchResultDTO searchResult)
         {
             if (searchResult != null && searchResult.results.Count > 0)
             {
@@ -97,7 +97,7 @@ namespace Shop.WebForms.Pages
 
                 //PagingManager
                 int totalPages =
-                    Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.paging.total) /
+                    Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.totalItemCount) /
                                                     Convert.ToDecimal(_itemsPerPage)));
                 //Set hidden field to help Paginator Item on Aspx page.
                 hfTotalPages.Value = totalPages.ToString();

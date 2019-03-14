@@ -15,7 +15,7 @@
                     <asp:Repeater runat="server" ID="rpImages">
                         <ItemTemplate>
                             <div class='<%# "carousel-item "+(Container.ItemIndex == 0 ? "active" : "") %>' style="max-height: 430px;">
-                                <img class="d-block w-100 h-auto" src='<%# ((Shop.Entities.Picture)Container.DataItem).url %>' alt="First slide">
+                                <img class="d-block w-100 h-auto" src='<%# Container.DataItem %>' alt="First slide">
                             </div>
                         </ItemTemplate>
                     </asp:Repeater>                    
@@ -73,8 +73,8 @@
             <ItemTemplate>
                 <div class="col-md-6">
                     <blockquote class="blockquote">                        
-                        <footer class="blockquote-footer"><%# ((Shop.Entities.AttributeX)Container.DataItem).name + ":" %></footer>
-                        <p class="mb-0"><%# ((Shop.Entities.AttributeX)Container.DataItem).value_name %></p>                        
+                        <footer class="blockquote-footer"><%# ((Tuple<string,string>)Container.DataItem).Item1 + ":" %></footer>
+                        <p class="mb-0"><%# ((Tuple<string,string>)Container.DataItem).Item2 %></p>                        
                     </blockquote>
                 </div>
             </ItemTemplate>

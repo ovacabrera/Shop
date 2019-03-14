@@ -4,10 +4,10 @@ namespace Shop.ExternalServices.Interfaces
 {
     public interface IExternalService
     {
-        Item GetItem(string id);
+        ItemEntity GetItem(string id);
 
-        LargeDescription GetItemLargeDescription(string itemId);
+        ItemLargeDescriptionEntity GetItemLargeDescription(string itemId);
 
-        SearchResult SearchItems(string filter, int? offset, int? limit);
+        SearchResultEntity SearchItems(string filter, int? offset, int? limit);
     }
 }
