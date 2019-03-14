@@ -89,6 +89,6 @@
     </div>
     <div runat="server" class="jumbotron" ID="divNoItem">
         <i class="fa fa-warning"></i>
-        <h2>Parece que la página no existe.</h2>
+        <h2>OPPS!</h2>
     </div>
 </asp:Content>

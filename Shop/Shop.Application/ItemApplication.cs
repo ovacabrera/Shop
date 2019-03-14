@@ -27,9 +27,9 @@ namespace Shop.Application
             Mapper.Initialize(cfg => cfg.AddProfile<ServiceProfile>());
         }
 
-        public ItemDTO GetItem(string itemId)
+        public ItemDTO GetItem(string itemId, ref string responseMessage)
         {
-            ItemEntity itemEntity = _domain.GetItem(itemId);
+            ItemEntity itemEntity = _domain.GetItem(itemId, ref responseMessage);
             if (itemEntity != null)
             {
                 //ItemDTO itemDTO = new ItemDTO();
@@ -64,9 +64,9 @@ namespace Shop.Application
             
         }
 
-        public SearchResultDTO SearchItems(string filter, int? offset, int? limit)
+        public SearchResultDTO SearchItems(string filter, int? offset, int? limit, ref string responseMessage)
         {
-            SearchResultEntity searchResult = _domain.SearchItems(filter, offset, limit);
+            SearchResultEntity searchResult = _domain.SearchItems(filter, offset, limit, ref responseMessage);
             if (searchResult != null)
             {
                 //SearchResultDTO searchResultDTO = new SearchResultDTO();

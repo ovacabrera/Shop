@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.HtmlControls;
 using Shop.Application.Interfaces;
 using Shop.CrossCutting;
 using Shop.DTOs;
@@ -49,8 +50,8 @@ namespace Shop.WebForms.Pages
 
                 string id = (Page.Request.Params["id"]) == null ? string.Empty : Convert.ToString(Page.Request.Params["id"]);
 
-                //Entities.ItemEntity item = _model.GetItem(id);
-                ItemDTO itemDTO = ItemApplication.GetItem(id);
+                string responseMessage = string.Empty;
+                ItemDTO itemDTO = ItemApplication.GetItem(id, ref responseMessage);
                 if (itemDTO != null)
                 {
                     divNoItem.Visible = false;
@@ -78,6 +79,11 @@ namespace Shop.WebForms.Pages
                 else
                 {
                     divNoItem.Visible = true;
+                    HtmlGenericControl messageToShow = new HtmlGenericControl();
+                    messageToShow.TagName = "h2";
+                    messageToShow.InnerHtml = responseMessage;
+                    divNoItem.Controls.Add(messageToShow);
+                    
                     divItem.Visible = false;
                 }
             }

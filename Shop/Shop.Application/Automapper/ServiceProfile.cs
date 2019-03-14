@@ -12,7 +12,7 @@ namespace Shop.Application.Automapper
         {
             CreateMap<ItemEntity, ItemDTO>()
                 .ForMember(dest => dest.itemLargeDescription,
-                    opc => opc.MapFrom(src => src.ItemLargeDescription.plain_text))
+                    opc => opc.MapFrom(src => src.ItemLargeDescription == null ? string.Empty : src.ItemLargeDescription.plain_text))
                 .ForMember(dest => dest.picturesUrl,
                     opc => opc.MapFrom(src => src.pictures.Select(i => i.url).ToList()))
                 .ForMember(dest => dest.attributes, opc => opc.MapFrom(src => src.attributes

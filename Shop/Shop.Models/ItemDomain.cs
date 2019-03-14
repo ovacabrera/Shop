@@ -16,16 +16,17 @@ namespace Shop.Models
             _logger = logger;
         }
 
-        public ItemEntity GetItem(string itemId)
+        public ItemEntity GetItem(string itemId, ref string responseMessage)
         {
             try
             {
                 if (!ValidateItemIdParameter(itemId)) return null;
 
-                var item = _externalService.GetItem(itemId);
+                var item = _externalService.GetItem(itemId, ref responseMessage);
                 if (item != null)
                 {
-                    item.ItemLargeDescription = _externalService.GetItemLargeDescription(itemId);
+                    string responseMessageNotNecessary = string.Empty;
+                    item.ItemLargeDescription = _externalService.GetItemLargeDescription(itemId, ref responseMessageNotNecessary);
                 }
 
                 return item;
@@ -34,6 +35,7 @@ namespace Shop.Models
             catch (System.Exception ex)
             {
                 _logger.Error(ex);
+                responseMessage = ex.Message;
                 return null;
             }
         }
@@ -58,17 +60,18 @@ namespace Shop.Models
             return itemId.Trim() != string.Empty;
         }
 
-        public SearchResultEntity SearchItems(string filter, int? offset, int? limit)
+        public SearchResultEntity SearchItems(string filter, int? offset, int? limit, ref string responseMessage)
         {
             try
             {
                 if (!ValidateSearchItemsParameters(filter, offset, limit)) return null;
 
-                return _externalService.SearchItems(filter, offset, limit);
+                return _externalService.SearchItems(filter, offset, limit, ref responseMessage);
             }
             catch (System.Exception ex)
             {
                 _logger.Error(ex);
+                responseMessage = ex.Message;
                 return null;
             }
         }

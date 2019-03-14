@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.UI.HtmlControls;
 using Shop.Application.Interfaces;
 using Shop.CrossCutting;
 using Shop.DTOs;
@@ -60,11 +61,11 @@ namespace Shop.WebForms.Pages
                 GetParameters(out filter, out pageNumber);
 
                 //Set hidden field to help Paginator Item on Aspx page.
-                hfCurrentPage.Value = pageNumber.ToString();                
+                hfCurrentPage.Value = pageNumber.ToString();
+                string responseMessage = string.Empty;
+                SearchResultDTO searchResult = ItemApplication.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage, ref responseMessage);
 
-                SearchResultDTO searchResult = ItemApplication.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage);
-
-                BindResults(searchResult);
+                BindResults(searchResult, responseMessage);
             }
             catch (Exception ex)
             {
@@ -91,7 +92,7 @@ namespace Shop.WebForms.Pages
             }
         }
 
-        private void BindResults(SearchResultDTO searchResult)
+        private void BindResults(SearchResultDTO searchResult, string responseMessage)
         {
             if (searchResult != null && searchResult.results.Count > 0)
             {
@@ -112,6 +113,11 @@ namespace Shop.WebForms.Pages
             {
                 rpItems.Visible = false;
                 divNoResults.Visible = true;
+                divNoResults.Visible = true;
+                HtmlGenericControl messageToShow = new HtmlGenericControl();
+                messageToShow.TagName = "h2";
+                messageToShow.InnerHtml = responseMessage;
+                divNoResults.Controls.Add(messageToShow);
             }
         }
 

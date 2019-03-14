@@ -4,7 +4,7 @@ namespace Shop.Application.Interfaces
 {
     public interface IItemApplication
     {
-        ItemDTO GetItem(string itemId);
-        SearchResultDTO SearchItems(string filter, int? offset, int? limit);
+        ItemDTO GetItem(string itemId, ref string responseMessage);
+        SearchResultDTO SearchItems(string filter, int? offset, int? limit, ref string responseMessage);
     }
 }
