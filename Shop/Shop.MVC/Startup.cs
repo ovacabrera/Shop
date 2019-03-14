@@ -9,6 +9,10 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Shop.Application;
+using Shop.Application.Interfaces;
+using Shop.CrossCutting.Log;
+using Shop.ExternalServices;
 
 namespace Shop.MVC
 {
@@ -18,7 +22,7 @@ namespace Shop.MVC
         {
             Configuration = configuration;
             // Assume AppConfiguration is a class representing a strongly-typed version of AppConfiguration section
-            services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
+            //services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
         }
 
         public IConfiguration Configuration { get; }
@@ -35,6 +39,19 @@ namespace Shop.MVC
 
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            //Action<Shop.MVC.ApplicationObjects> applicationObjects = (opt =>
+            //{
+            //    opt.itemApplication =
+            //        new ItemApplication(new ExternalServiceMercadoLibre("https://api.mercadolibre.com"),
+            //            new Log4NetLoggerService());
+            //});
+            //services.Configure(applicationObjects);
+            //services.AddSingleton(resolver => resolver.GetRequiredService<ApplicationObjects>());
+
+            services.AddSingleton<IItemApplication>(new ItemApplication(
+                new ExternalServiceMercadoLibre("https://api.mercadolibre.com"),
+                new Log4NetLoggerService()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

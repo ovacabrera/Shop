@@ -5,12 +5,12 @@ namespace Shop.DTOs
 {
     public class ItemDTO
     {
-        public string title { get; set; }
-        public decimal price { get; set; }
-        public int sold_quantity { get; set; }
-        public int available_quantity { get; set; }
-        public string itemLargeDescription { get; set; }
-        public List<string> picturesUrl { get; set; }
-        public List<Tuple<string,string>> attributes { get; set; }        
+        public string Title { get; set; }
+        public decimal Price { get; set; }
+        public int SoldQuantity { get; set; }
+        public int AvailableQuantity { get; set; }
+        public string ItemLargeDescription { get; set; }
+        public List<string> PicturesUrl { get; set; }
+        public List<Tuple<string,string>> Attributes { get; set; }        
     }
 }

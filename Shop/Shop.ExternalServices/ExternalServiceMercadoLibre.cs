@@ -1,9 +1,5 @@
-﻿using System;
-using System.Configuration;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http;
-using System.Runtime.Remoting.Channels;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Refit;
 using Shop.Entities;
@@ -16,9 +12,9 @@ namespace Shop.ExternalServices
     {
         private string _url;
 
-        public ExternalServiceMercadoLibre()
+        public ExternalServiceMercadoLibre(string url)
         {
-            _url = ConfigurationManager.AppSettings["APIMercadoLibre"];
+            _url = url;
         }
 
         public ItemEntity GetItem(string id, ref string responseMessage)

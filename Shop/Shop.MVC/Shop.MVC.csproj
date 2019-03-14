@@ -10,6 +10,7 @@
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
   </ItemGroup>
 
@@ -20,13 +21,12 @@
 
 
   <ItemGroup>
+    <ProjectReference Include="..\Shop.Application.Interfaces\Shop.Application.Interfaces.csproj" />
+    <ProjectReference Include="..\Shop.Application\Shop.Application.csproj" />
     <ProjectReference Include="..\Shop.CrossCutting.Log\Shop.CrossCutting.Log.csproj" />
     <ProjectReference Include="..\Shop.CrossCutting\Shop.CrossCutting.csproj" />
-    <ProjectReference Include="..\Shop.Entities\Shop.Entities.csproj" />
     <ProjectReference Include="..\Shop.ExternalServices.Interfaces\Shop.ExternalServices.Interfaces.csproj" />
     <ProjectReference Include="..\Shop.ExternalServices\Shop.ExternalServices.csproj" />
-    <ProjectReference Include="..\Shop.Models.Interfaces\Shop.Models.Interfaces.csproj" />
-    <ProjectReference Include="..\Shop.Models\Shop.Models.csproj" />
   </ItemGroup>
 
 </Project>

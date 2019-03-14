@@ -40,21 +40,6 @@ namespace Shop.Models
             }
         }
 
-        //public ItemLargeDescriptionEntity GetLargeDescription(string itemId)
-        //{
-        //    try
-        //    {
-        //        if (!ValidateItemIdParameter(itemId)) return null;
-
-        //        return _externalService.GetItemLargeDescription(itemId);
-        //    }
-        //    catch (System.Exception ex)
-        //    {
-        //        _logger.Error(ex);
-        //        return null;
-        //    }
-        //}
-
         public bool ValidateItemIdParameter(string itemId)
         {
             return itemId.Trim() != string.Empty;

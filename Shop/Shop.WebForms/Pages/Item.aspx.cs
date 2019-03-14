@@ -3,22 +3,14 @@ using System.Web.UI.HtmlControls;
 using Shop.Application.Interfaces;
 using Shop.CrossCutting;
 using Shop.DTOs;
-using Shop.Models.Interfaces;
 
 namespace Shop.WebForms.Pages
 {
     public partial class Item : System.Web.UI.Page
     {
         #region Attributes
-        //private IItemDomain _model;
-        private ILoggerService _logger;
-        public IItemApplication ItemApplication
-        {
-            get
-            {                
-                return (IItemApplication)Application["IItemApplication"]; 
-            }
-        }
+        private readonly ILoggerService _logger;
+        public IItemApplication ItemApplication => (IItemApplication)Application["IItemApplication"];
 
         #endregion
 
@@ -38,7 +30,6 @@ namespace Shop.WebForms.Pages
 
         public Item(ILoggerService logger)
         {
-            //_model = model;
             _logger = logger;
         }
 
@@ -57,23 +48,23 @@ namespace Shop.WebForms.Pages
                     divNoItem.Visible = false;
                     divItem.Visible = true;
 
-                    txtSoldQuantity.InnerText = itemDTO.sold_quantity > 0 ? itemDTO.sold_quantity.ToString() + " Vendidos" : "";
-                    txtTitulo.InnerText = itemDTO.title;
-                    txtPrecio.InnerText = "$ " + itemDTO.price.ToString("N");
+                    txtSoldQuantity.InnerText = itemDTO.SoldQuantity > 0 ? itemDTO.SoldQuantity.ToString() + " Vendidos" : "";
+                    txtTitulo.InnerText = itemDTO.Title;
+                    txtPrecio.InnerText = "$ " + itemDTO.Price.ToString("N");
 
-                    txtAvailableQuantity.InnerText = "(" + itemDTO.available_quantity.ToString() +
-                                                     (itemDTO.available_quantity == 1 ? " Disponible" : " Disponibles") + ")";
+                    txtAvailableQuantity.InnerText = "(" + itemDTO.AvailableQuantity.ToString() +
+                                                     (itemDTO.AvailableQuantity == 1 ? " Disponible" : " Disponibles") + ")";
 
-                    txtQuantity.Attributes.Add("max", itemDTO.available_quantity.ToString());
+                    txtQuantity.Attributes.Add("max", itemDTO.AvailableQuantity.ToString());
 
-                    txtDescription.InnerHtml = itemDTO.itemLargeDescription.Replace("\n", "<br />");
+                    txtDescription.InnerHtml = itemDTO.ItemLargeDescription.Replace("\n", "<br />");
 
-                    rpCharacterists.DataSource = itemDTO.attributes;
+                    rpCharacterists.DataSource = itemDTO.Attributes;
                     rpCharacterists.DataBind();
 
-                    rpCarouselControls.DataSource = itemDTO.picturesUrl;
+                    rpCarouselControls.DataSource = itemDTO.PicturesUrl;
                     rpCarouselControls.DataBind();
-                    rpImages.DataSource = itemDTO.picturesUrl;
+                    rpImages.DataSource = itemDTO.PicturesUrl;
                     rpImages.DataBind();
                 }
                 else

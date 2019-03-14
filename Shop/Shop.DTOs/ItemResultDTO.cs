@@ -6,10 +6,10 @@ namespace Shop.DTOs
 {
     public class ItemResultDTO
     {
-        public string id { get; set; }
-        public string title { get; set; }
-        public decimal price { get; set; }
-        public string thumbnail { get; set; }
-        public bool free_shipping { get; set; }
+        public string Id { get; set; }
+        public string Title { get; set; }
+        public decimal Price { get; set; }
+        public string Thumbnail { get; set; }
+        public bool FreeShipping { get; set; }
     }
 }

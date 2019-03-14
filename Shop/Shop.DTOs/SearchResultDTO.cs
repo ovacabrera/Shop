@@ -6,7 +6,7 @@ namespace Shop.DTOs
 {
     public class SearchResultDTO
     {
-        public int totalItemCount;        
-        public List<ItemResultDTO> results { get; set; }
+        public int TotalItemCount { get; set; }
+        public List<ItemResultDTO> Results { get; set; }
     }
 }

@@ -7,15 +7,15 @@
                  <asp:Repeater runat="server" ID="rpItems">
                      <ItemTemplate>
                          <div class="col-6 col-sm-4 col-lg-2">
-                             <div class="card shadow" style="width: 10rem;" onclick="GoToItemPage('<%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).id %>');">
+                             <div class="card shadow" style="width: 10rem;" onclick="GoToItemPage('<%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).Id %>');">
                                  <div class="d-flex justify-content-center">
-                                     <img class="card-img-top h-100 w-100" src='<%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).thumbnail %>'>
+                                     <img class="card-img-top h-100 w-100" src='<%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).Thumbnail %>'>
                                  </div>
                                  <hr/>
                                  <div class="card-body">
-                                     <h5 class="card-title"><%# "$ "+ ((Shop.DTOs.ItemResultDTO)Container.DataItem).price.ToString("N") %></h5>                                                                 
-                                     <small class="<%# "text-success " + (((Shop.DTOs.ItemResultDTO)Container.DataItem).free_shipping ? "visible" : "invisible") %>" >Envío Gratis</small>
-                                     <p class="card-text"><%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).title %></p>                                     
+                                     <h5 class="card-title"><%# "$ "+ ((Shop.DTOs.ItemResultDTO)Container.DataItem).Price.ToString("N") %></h5>                                                                 
+                                     <small class="<%# "text-success " + (((Shop.DTOs.ItemResultDTO)Container.DataItem).FreeShipping ? "visible" : "invisible") %>" >Envío Gratis</small>
+                                     <p class="card-text"><%# ((Shop.DTOs.ItemResultDTO)Container.DataItem).Title %></p>                                     
                                  </div>
                              </div>
                              <br/>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Web.UI.HtmlControls;
 using Shop.Application.Interfaces;
 using Shop.CrossCutting;
@@ -10,23 +11,13 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        public IItemApplication ItemApplication
-        {
-            get
-            {
-                return (IItemApplication)Application["IItemApplication"];
-            }
-        }
+        public IItemApplication ItemApplication => (IItemApplication)Application["IItemApplication"];
 
-        private ILoggerService _logger;
+        private readonly ILoggerService _logger;
 
-        private int _itemsPerPage = 50;
-        private string filterParamName = "q";
-        private string _pageNumberParamName = "p";
-        public string PageNumberParamName
-        {
-            get { return _pageNumberParamName; }
-        }
+        private readonly int _itemsPerPage;
+        private readonly string _filterParamName;
+        public string PageNumberParamName { get; } = "p";
 
         #endregion
 
@@ -47,6 +38,11 @@ namespace Shop.WebForms.Pages
         public Search(ILoggerService logger)
         {            
             _logger = logger;
+
+            Int32.TryParse(ConfigurationManager.AppSettings["SearchPageItemsPerPage"], out var quantity);
+            _itemsPerPage = quantity;
+
+            _filterParamName = ConfigurationManager.AppSettings["SearchPageFilterParamName"];
         }
 
         private void Find()
@@ -77,9 +73,9 @@ namespace Shop.WebForms.Pages
 
         private void GetParameters(out string filter, out int pageNumberInside)
         {
-            filter = ((Page.Request.Params[filterParamName]) == null)
+            filter = ((Page.Request.Params[_filterParamName]) == null)
                 ? string.Empty
-                : Convert.ToString(Page.Request.Params[filterParamName]);
+                : Convert.ToString(Page.Request.Params[_filterParamName]);
 
             string pageNumber = ((Page.Request.Params[PageNumberParamName]) == null)
                 ? string.Empty
@@ -94,18 +90,21 @@ namespace Shop.WebForms.Pages
 
         private void BindResults(SearchResultDTO searchResult, string responseMessage)
         {
-            if (searchResult != null && searchResult.results.Count > 0)
+            if (searchResult != null && searchResult.Results.Count > 0)
             {
                 rpItems.Visible = true;
                 divNoResults.Visible = false;
 
-                rpItems.DataSource = searchResult.results;
+                rpItems.DataSource = searchResult.Results;
                 rpItems.DataBind();
 
-                //PagingManager
-                int totalPages =
-                    Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.totalItemCount) /
-                                                    Convert.ToDecimal(_itemsPerPage)));
+                int totalPages = 0;
+                if (_itemsPerPage > 0)
+                {
+                    totalPages = Convert.ToInt32(Decimal.Ceiling(Convert.ToDecimal(searchResult.TotalItemCount) /
+                                                                 Convert.ToDecimal(_itemsPerPage)));
+                }
+
                 //Set hidden field to help Paginator Item on Aspx page.
                 hfTotalPages.Value = totalPages.ToString();
             }
