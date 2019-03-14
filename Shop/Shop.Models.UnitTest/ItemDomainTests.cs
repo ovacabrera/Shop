@@ -69,7 +69,8 @@ namespace Shop.Models.UnitTest
             var mockedItem = new ItemEntity {id = itemId};
 
             var externalService = new Mock<IExternalService>();
-            externalService.Setup(m => m.GetItem(itemId))
+            string externalServiceResponseMessage = string.Empty;
+            externalService.Setup(m => m.GetItem(itemId,ref externalServiceResponseMessage))
                 .Returns(mockedItem);
             var loggerService = new Mock<ILoggerService>();
 
@@ -79,7 +80,8 @@ namespace Shop.Models.UnitTest
 
             #region Act
 
-            var item = model.GetItem(itemId);
+            string responseMessage = string.Empty;
+            var item = model.GetItem(itemId, ref responseMessage);
 
             #endregion
 
@@ -203,7 +205,8 @@ namespace Shop.Models.UnitTest
             const string filter = "bicicleta";
 
             var externalService = new Mock<IExternalService>();
-            externalService.Setup(m => m.SearchItems(filter, null, null))
+            string externalServiceResponseMessage = string.Empty;
+            externalService.Setup(m => m.SearchItems(filter, null, null,ref externalServiceResponseMessage))
                 .Returns(mockedExternalServiceResult);
             var loggerService = new Mock<ILoggerService>();
 
@@ -213,7 +216,8 @@ namespace Shop.Models.UnitTest
 
             #region Act
 
-            var searchResult = model.SearchItems(filter, null, null);
+            string responseMessage = string.Empty;
+            var searchResult = model.SearchItems(filter, null, null, ref responseMessage);
 
             #endregion
 
