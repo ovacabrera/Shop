@@ -20,7 +20,7 @@ namespace Shop.Application
             _externalService = externalService;
             _logger = logger;
             _domain = new ItemDomain(externalService,logger);
-
+            
             Mapper.Initialize(cfg => cfg.AddProfile<ServiceProfile>());
         }
 
@@ -34,6 +34,11 @@ namespace Shop.Application
         {
             var searchResult = _domain.SearchItems(filter, offset, limit, ref responseMessage);
             return searchResult != null ? Mapper.Map<SearchResultDTO>(searchResult) : null;
+        }
+
+        public static void MapperReset()
+        {
+            Mapper.Reset();
         }
     }
 }
