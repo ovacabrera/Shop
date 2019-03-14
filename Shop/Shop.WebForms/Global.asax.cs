@@ -34,6 +34,9 @@ namespace Shop.WebForms
             container.RegisterType<IItemDomain, ItemDomain>();
             container.RegisterType<ILoggerService, Log4NetLoggerService>();
             container.RegisterType<IItemApplication, ItemApplication>();
+
+            IItemApplication itemApplication = new ItemApplication(new ExternalServiceMercadoLibre(), new Log4NetLoggerService());
+            Application["IItemApplication"] = itemApplication;
         }
     }
 }

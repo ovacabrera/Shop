@@ -9,7 +9,14 @@ namespace Shop.WebForms.Pages
     {
         #region Attributes
 
-        private IItemApplication _application;
+        public IItemApplication ItemApplication
+        {
+            get
+            {
+                return (IItemApplication)Application["IItemApplication"];
+            }
+        }
+
         private ILoggerService _logger;
 
         private int _itemsPerPage = 50;
@@ -36,9 +43,8 @@ namespace Shop.WebForms.Pages
 
         #region Metods
 
-        public Search(IItemApplication application, ILoggerService logger)
-        {
-            _application = application;
+        public Search(ILoggerService logger)
+        {            
             _logger = logger;
         }
 
@@ -56,7 +62,7 @@ namespace Shop.WebForms.Pages
                 //Set hidden field to help Paginator Item on Aspx page.
                 hfCurrentPage.Value = pageNumber.ToString();                
 
-                SearchResultDTO searchResult = _application.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage);
+                SearchResultDTO searchResult = ItemApplication.SearchItems(filter, (pageNumber - 1) * _itemsPerPage, _itemsPerPage);
 
                 BindResults(searchResult);
             }

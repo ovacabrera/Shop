@@ -11,7 +11,14 @@ namespace Shop.WebForms.Pages
         #region Attributes
         //private IItemDomain _model;
         private ILoggerService _logger;
-        private IItemApplication _application;
+        public IItemApplication ItemApplication
+        {
+            get
+            {                
+                return (IItemApplication)Application["IItemApplication"]; 
+            }
+        }
+
         #endregion
 
         #region Events
@@ -28,11 +35,10 @@ namespace Shop.WebForms.Pages
 
         #region Methods
 
-        public Item(ILoggerService logger, IItemApplication application)
+        public Item(ILoggerService logger)
         {
             //_model = model;
             _logger = logger;
-            _application = application;
         }
 
         private void ShowItem()
@@ -44,7 +50,7 @@ namespace Shop.WebForms.Pages
                 string id = (Page.Request.Params["id"]) == null ? string.Empty : Convert.ToString(Page.Request.Params["id"]);
 
                 //Entities.ItemEntity item = _model.GetItem(id);
-                ItemDTO itemDTO = _application.GetItem(id);
+                ItemDTO itemDTO = ItemApplication.GetItem(id);
                 if (itemDTO != null)
                 {
                     divNoItem.Visible = false;
