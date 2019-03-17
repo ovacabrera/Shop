@@ -9,8 +9,8 @@
         public StateEntity state { get; set; }
         public CountryEntity country { get; set; }
         public SearchLocationEntity search_location { get; set; }
-        public decimal latitude { get; set; }
-        public decimal longitude { get; set; }
+        public decimal? latitude { get; set; }
+        public decimal? longitude { get; set; }
         public int id { get; set; }
     }
 }
